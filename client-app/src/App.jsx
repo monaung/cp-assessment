@@ -18,8 +18,18 @@ function App() {
 
 
   const add = (title, note) => {
-		console.log(title);
-	};
+    console.log(title);
+
+    axios.post('https://localhost:5001/api/todo', null, { params: {
+      title: title,
+      note: note
+    }})
+    .then((response) => {
+      setTodoItems([...todoItems, response.data]);
+    }, (error) => {
+      console.log(error);
+    });
+    }
 
   return (
     <div tyle={{

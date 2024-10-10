@@ -44,7 +44,7 @@ public class TodoControllerTests
         };
 
         //Act
-        var result = await controller.CreateTodoItem(todoItem);
+        var result = await controller.CreateTodoItem(todoItem.Title, todoItem.Note);
         var actionResult = Assert.IsType<ActionResult<TodoItem>>(result);
 
         //Assert

@@ -9,7 +9,7 @@ public interface ITodoService
     List<TodoItem> GetAllCompletedTodoItems();
     List<TodoItem> GetAllImportantTodoItems();
     TodoItem GetTodoItemById(Guid id);
-    Task<TodoItem> AddTodoItem(TodoItem todoItem);
+    Task<TodoItem> AddTodoItem(string title, string note);
     TodoItem UpdateTodoItem(Guid id, TodoItem todoItem);
     bool DeleteTodoItem(Guid id);
 }

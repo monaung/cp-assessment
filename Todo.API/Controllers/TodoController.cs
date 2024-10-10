@@ -26,6 +26,8 @@ namespace Todo.API.Controllers
             return Ok(todoItemList);
         }   
 
+
+
         [HttpGet("{id}")]
         public async Task<ActionResult> GetTodoItem(string id)
         {
@@ -36,14 +38,20 @@ namespace Todo.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<TodoItem>> CreateTodoItem(TodoItem item)
+        public async Task<ActionResult<TodoItem>> CreateTodoItem(string title, string note)
         {
-            if(item ==null) return BadRequest();
+            Console.Write(title);
+            if(string.IsNullOrEmpty(title)) return BadRequest();
 
-            // _context.TodoItems.Add(item);
-            // await _context.SaveChangesAsync();
-            var todoItem = await  _service.AddTodoItem(item);
+            var todoItem = await  _service.AddTodoItem(title,note);
             return todoItem;
+        }
+
+        [HttpPost]
+        [Route("api/todo/hello")]
+        public string Something() {
+
+            return "I am fine";
         }
 
         [HttpPut("{id}")]

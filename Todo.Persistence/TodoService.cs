@@ -10,31 +10,33 @@ public class TodoService : ITodoService
     {
         __dummyTodoItems = new List<TodoItem>(){
             new TodoItem(){
-                Title = "Title 1",
-                Note ="Note 1",
+                Title = "Pay utilities bill by Saturday",
+                Note ="$100",
                 CreatedDate = DateTime.Now
             },
             new TodoItem(){
-                Title = "Title 2",
-                Note ="Note 2",
+                Title = "To buy movie tickets",
+                Note ="2 tickets",
                 CreatedDate = DateTime.Now
             },
             new TodoItem(){
-                Title = "Title 3",
-                Note ="Note 3",
+                Title = "To setup meeting with John",
+                Note ="Zoom",
                 CreatedDate = DateTime.Now
             },
         };
     }
-    public async Task<TodoItem> AddTodoItem(TodoItem todoItem)
+    public async Task<TodoItem> AddTodoItem(string title, string note)
     {
-         __dummyTodoItems.Add(new TodoItem(){
-                Title = todoItem.Title,
-                Note = todoItem.Note,
-                CreatedDate = todoItem.CreatedDate
-            });
+        var newTodo = new TodoItem(){
+            Title = title,
+            Note = note,
+            CreatedDate = DateTime.Now
+        };
+
+         __dummyTodoItems.Add(newTodo);
             
-            return await Task.FromResult(todoItem);
+        return await Task.FromResult(newTodo);
     }
 
     public bool DeleteTodoItem(Guid id)

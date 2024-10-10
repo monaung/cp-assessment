@@ -32,7 +32,6 @@ const todoItems = prop.todoItems;
               <div>
                 {todoItem.note}
               </div>
-            <button onClick={() => remove(todoItem.id)}>Delete</button>
             </li>
             )}
 		</ul>
