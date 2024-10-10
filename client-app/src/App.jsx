@@ -1,34 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react'
+import axios from 'axios';
+import TodoItem from './components/TodoItem';
+import TodoGrid from './components/TodoGrid';
+import TodoForm from './components/TodoForm';
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [todoItems, setTodoItems] = useState([]);
+
+  useEffect(() => {
+    axios.get('https://localhost:5001/api/todo')
+    .then(response => {
+        setTodoItems(response.data);
+    })
+  }, [])
+
+
+  const add = (title, note) => {
+		console.log(title);
+	};
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div tyle={{
+      width: "100%",
+      minHeight: 1500,
+      background: "white",
+      color: "black",
+      paddingTop: 20,
+    }}>
+      <div style={{ maxWidth: 600, margin: "0 auto" }}>
+        <h1
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          margin: "0 0 20px 0",
+        }}>
+            To do list!
+        </h1>
+        <TodoForm add={add}/>
+        <TodoItem todoItems={todoItems}/>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+   </div>
   )
 }
 
